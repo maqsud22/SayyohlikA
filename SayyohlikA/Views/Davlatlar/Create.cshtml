@@ -1,0 +1,16 @@
+﻿@model SayyohlikA.Models.Davlat
+@{
+    ViewData["Title"] = "Davlat Qo‘shish";
+}
+
+<h2>Yangi Davlat Qo‘shish</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Nomi" class="control-label"></label>
+        <input asp-for="Nomi" class="form-control" />
+        <span asp-validation-for="Nomi" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Saqlash</button>
+    <a asp-action="Index" class="btn btn-secondary">Orqaga</a>
+</form>
