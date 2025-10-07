@@ -76,7 +76,7 @@ namespace SayyohlikA.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var xaridor = _context.Xaridorlar.Find(id);
-            _context.Xaridorlar.Remove(xaridor);
+            _context.Xaridorlar.Remove(entity: xaridor);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

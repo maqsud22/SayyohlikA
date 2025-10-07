@@ -9,8 +9,8 @@ namespace SayyohlikA.Models
 
         [Required]
         [Display(Name = "Davlat nomi")]
-        public string Nomi { get; set; }
+        public required string Nomi { get; set; }
 
-        public ICollection<Shahar> Shaharlar { get; set; }
+        public required ICollection<Shahar> Shaharlar { get; set; }
     }
 }
