@@ -1,0 +1,32 @@
+﻿@model SayyohlikA.Models.Xaridor
+
+@{
+    ViewData["Title"] = "Xaridorni O'chirish";
+}
+
+<h2>Xaridorni o‘chirish</h2>
+
+<h4>Ushbu xaridorni o‘chirishga ishonchingiz komilmi?</h4>
+<hr />
+<dl class="row">
+    <dt class="col-sm-2">FISH</dt>
+    <dd class="col-sm-10">@Model.FISH</dd>
+
+    <dt class="col-sm-2">Telefon</dt>
+    <dd class="col-sm-10">@Model.PhoneNumber</dd>
+
+    <dt class="col-sm-2">Email</dt>
+    <dd class="col-sm-10">@Model.Email</dd>
+
+    <dt class="col-sm-2">Manzil</dt>
+    <dd class="col-sm-10">@Model.Manzili</dd>
+
+    <dt class="col-sm-2">Sayohat Manzili</dt>
+    <dd class="col-sm-10">@Model.Sayohat_manzili</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">O‘chirish</button>
+    <a asp-action="Index" class="btn btn-secondary">Bekor qilish</a>
+</form>
