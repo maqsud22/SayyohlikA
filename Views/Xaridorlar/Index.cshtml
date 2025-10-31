@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SayyohlikA.Models.Xaridor>
+@{
+    ViewData["Title"] = "Xaridorlar Ro'yxati";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a asp-action="AddXaridor" class="btn btn-primary mb-3">Yangi Xaridor Qo'shish</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>FISH</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Manzil</th>
+            <th>Sayohat Manzili</th>
+            <th>Amallar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.FISH</td>
+                <td>@x.PhoneNumber</td>
+                <td>@x.Email</td>
+                <td>@x.Manzili</td>
+                <td>@x.Sayohat_manzili</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@x.Id" class="btn btn-warning btn-sm">Tahrirlash</a>
+                    <a asp-action="Delete" asp-route-id="@x.Id" class="btn btn-danger btn-sm">O'chirish</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
