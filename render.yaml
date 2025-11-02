@@ -1,1 +1,8 @@
-﻿
+﻿services:
+  - type: web
+    name: sayyohlika
+    plan: free
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    buildCommand: ./render-build.sh
+    startCommand: dotnet SayyohlikA.dll

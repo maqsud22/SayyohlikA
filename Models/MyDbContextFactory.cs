@@ -18,7 +18,7 @@ namespace SayyohlikA.Models
 
             var optionsBuilder = new DbContextOptionsBuilder<MyDbContext>();
             optionsBuilder.UseNpgsql(connectionString);
-
+            
             return new MyDbContext(optionsBuilder.Options);
         }
     }
