@@ -7,3 +7,15 @@ obj/
 *.dbmdl
 *.cache
 *.log
+
+# ASP.NET Core configuration
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+
+# Publish output
+/publish/
+
+# Secrets
+*.secret.json
+

@@ -12,15 +12,15 @@ using SayyohlikA.Models;
 namespace SayyohlikA.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20251017085849_InitPostgres")]
-    partial class InitPostgres
+    [Migration("20251107055012_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
