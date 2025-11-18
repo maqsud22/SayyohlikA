@@ -15,6 +15,7 @@ namespace SayyohlikA.Models
         public DbSet<Xaridor> Xaridorlar { get; set; }
         public DbSet<Tarjimon> Tarjimonlar { get; set; }
         public DbSet<Yangiliklar> Yangiliklar { get; set; }
-       
+        public DbSet<RequestLog> RequestLogs { get; set; }
+
     }
 }

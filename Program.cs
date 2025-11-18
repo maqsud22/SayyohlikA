@@ -1,5 +1,6 @@
 using SayyohlikA.Models;
 using Microsoft.EntityFrameworkCore;
+using SayyohlikA.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,13 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 
 var app = builder.Build();
 
+app.UseMiddleware<RequestLoggingMiddleware>();
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
 
 if (!app.Environment.IsDevelopment())
 {
