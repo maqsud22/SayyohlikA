@@ -17,14 +17,6 @@ builder.Services.AddDbContext<MyDbContext>(options =>
 
 var app = builder.Build();
 
-app.UseMiddleware<RequestLoggingMiddleware>();
-
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
-
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -36,6 +28,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// ?? MIDDLEWARENI ENG TO‘G‘RI JOYGA QO‘YISH ??
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseAuthorization();
 
