@@ -57,6 +57,31 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        // Brauzerdan GEO koordinate so'rash
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                function (pos) {
+                    let lat = pos.coords.latitude;
+                    let lon = pos.coords.longitude;
+
+                    // Backendga yuborish
+                    fetch('/Admin/SaveGpsLocation', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ latitude: lat, longitude: lon })
+                    });
+                },
+                function (err) {
+                    console.log("GPS ruxsat berilmadi:", err);
+                },
+                { enableHighAccuracy: true }
+            );
+        }
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
