@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using SayyohlikA.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
@@ -18,7 +18,7 @@ namespace SayyohlikA.Middleware
         {
             var request = context.Request;
 
-            // TO‘G‘RI IP olish
+            // IP olish
             string realIp = GetClientIp(context);
 
             var log = new RequestLog
@@ -30,21 +30,19 @@ namespace SayyohlikA.Middleware
                 Language = request.Headers["Accept-Language"].ToString(),
                 Referer = request.Headers["Referer"].ToString(),
                 Time = DateTime.UtcNow,
-
                 Country = "Unknown",
                 City = "Unknown",
                 ISP = "Unknown",
                 Coordinates = "Unknown"
             };
 
-            // 🔥 GEO INFO olish
+            // GEO INFO olish (xatolarni e'tiborsiz qoldirish)
             if (!string.IsNullOrEmpty(realIp))
             {
                 try
                 {
-                    var httpClient = new HttpClient();
+                    using var httpClient = new HttpClient();
                     var geo = await httpClient.GetFromJsonAsync<GeoResponse>($"http://ip-api.com/json/{realIp}");
-
                     if (geo != null)
                     {
                         log.Country = geo.Country ?? "Unknown";
@@ -53,11 +51,22 @@ namespace SayyohlikA.Middleware
                         log.Coordinates = $"{geo.Lat},{geo.Lon}";
                     }
                 }
-                catch { }
+                catch
+                {
+                    // Xatolarni e'tiborsiz qoldirish
+                }
             }
 
-            db.RequestLogs.Add(log);
-            await db.SaveChangesAsync();
+            // DB yozuv (xatolarni e'tiborsiz qoldirish)
+            try
+            {
+                db.RequestLogs.Add(log);
+                await db.SaveChangesAsync();
+            }
+            catch
+            {
+                // DB xatolarini e'tiborsiz qoldirish
+            }
 
             await _next(context);
         }
@@ -65,7 +74,6 @@ namespace SayyohlikA.Middleware
         private string GetClientIp(HttpContext context)
         {
             string ip = context.Request.Headers["X-Forwarded-For"].FirstOrDefault();
-
             if (string.IsNullOrEmpty(ip))
                 ip = context.Connection.RemoteIpAddress?.ToString();
 
