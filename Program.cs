@@ -2,8 +2,10 @@ using SayyohlikA.Models;
 using Microsoft.EntityFrameworkCore;
 using SayyohlikA.Middleware;
 
-
 var builder = WebApplication.CreateBuilder(args);
+
+// appsettings.json faylini monitoringsiz yuklash
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
 
 // Environment variable orqali connection stringni olish
 var connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
@@ -20,7 +22,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-
     app.UseHsts();
 }
 
@@ -29,7 +30,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// ?? MIDDLEWARENI ENG TO‘G‘RI JOYGA QO‘YISH ??
+// Middleware eng toâ€˜gâ€˜ri joyi shu â€” routingdan keyin, authorizationdan oldin
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseAuthorization();
