@@ -5,7 +5,7 @@
 namespace SayyohlikA.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRequestLoggingMiddleware : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

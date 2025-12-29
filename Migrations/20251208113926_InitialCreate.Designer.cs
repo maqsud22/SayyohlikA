@@ -12,7 +12,7 @@ using SayyohlikA.Models;
 namespace SayyohlikA.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20251107055012_InitialCreate")]
+    [Migration("20251208113926_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -53,9 +53,6 @@ namespace SayyohlikA.Migrations
                     b.Property<int>("DavlatId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("MamlakatId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Nomi")
                         .IsRequired()
                         .HasColumnType("text");
@@ -67,7 +64,7 @@ namespace SayyohlikA.Migrations
                     b.ToTable("Shaharlar");
                 });
 
-            modelBuilder.Entity("SayyohlikA.Models.Tarjimon", b =>
+            modelBuilder.Entity("Xaridor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,81 +72,33 @@ namespace SayyohlikA.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FISH")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Til")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tarjimonlar");
-                });
-
-            modelBuilder.Entity("SayyohlikA.Models.Xaridor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("DavlatId")
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
+                    b.Property<string>("FIO")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("FISH")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Manzili")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Sayohat_manzili")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Xaridorlar");
-                });
-
-            modelBuilder.Entity("SayyohlikA.Models.Yangiliklar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ShaharId")
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
+                    b.Property<string>("Telefon")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("PublishedDate")
+                    b.Property<DateTime?>("TugilganSana")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Sarlavxa")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime?>("YaratilganVaqt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Yangiliklar");
+                    b.HasIndex("DavlatId");
+
+                    b.HasIndex("ShaharId");
+
+                    b.ToTable("Xaridorlar");
                 });
 
             modelBuilder.Entity("SayyohlikA.Models.Shahar", b =>
@@ -161,6 +110,25 @@ namespace SayyohlikA.Migrations
                         .IsRequired();
 
                     b.Navigation("Davlat");
+                });
+
+            modelBuilder.Entity("Xaridor", b =>
+                {
+                    b.HasOne("SayyohlikA.Models.Davlat", "Davlat")
+                        .WithMany()
+                        .HasForeignKey("DavlatId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("SayyohlikA.Models.Shahar", "Shahar")
+                        .WithMany()
+                        .HasForeignKey("ShaharId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Davlat");
+
+                    b.Navigation("Shahar");
                 });
 
             modelBuilder.Entity("SayyohlikA.Models.Davlat", b =>
