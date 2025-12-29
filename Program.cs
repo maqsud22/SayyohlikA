@@ -4,16 +4,21 @@ using SayyohlikA.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// appsettings.json faylini monitoringsiz yuklash
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
+// ❌ DEFAULT config'larni O‘CHIRAMIZ
+builder.Configuration.Sources.Clear();
 
-// Environment variable orqali connection stringni olish
-var connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
+// ✅ QO‘LDA config qo‘SHAMIZ (reload YO‘Q)
+builder.Configuration
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+    .AddEnvironmentVariables();
+
+// Connection string
+var connectionString =
+    Environment.GetEnvironmentVariable("DefaultConnection")
     ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddControllersWithViews();
 
-// EF Core uchun PostgreSQL ulanishi
 builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseNpgsql(connectionString));
 
@@ -27,10 +32,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
-// Middleware eng to‘g‘ri joyi shu — routingdan keyin, authorizationdan oldin
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseAuthorization();
