@@ -9,7 +9,7 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #1f6feb;
 }
 
 html {
@@ -18,91 +18,167 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: #f8f9fb;
+  margin-bottom: 0;
+  background: #f5f6fa;
+  color: #121826;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
-.hero-section {
-  background: radial-gradient(circle at top left, #1b5ec9, #0b285c 60%);
-  padding: 5rem 0 4.5rem;
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #eef0f4;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
-.hero-tag {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 0.4rem 1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
+.navbar-brand {
+  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
-.hero-card {
-  background: #ffffff;
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+.navbar .nav-link {
+  font-weight: 500;
   color: #1f2937;
 }
 
-.hero-card ul li {
-  padding: 0.6rem 0;
-  border-bottom: 1px solid #eef0f4;
+.hero {
+  background: radial-gradient(circle at top left, #1f6feb, #0b2658 60%);
+  color: #ffffff;
+  padding: 5rem 0;
 }
 
-.hero-card ul li:last-child {
-  border-bottom: none;
+.hero h1 {
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
-.hero-stats span {
+.hero p {
+  font-size: 1.1rem;
+  max-width: 520px;
+}
+
+.hero-pill {
+  display: inline-flex;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.hero-metrics {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-metrics strong {
   display: block;
+  font-size: 1.2rem;
+}
+
+.hero-metrics span {
   font-size: 0.9rem;
   opacity: 0.85;
 }
 
-.section-padding {
-  padding: 4rem 0;
+.hero-card-grid {
+  display: grid;
+  gap: 1.2rem;
 }
 
-.feature-card,
-.info-card,
-.destination-card {
-  background: #ffffff;
-  padding: 1.8rem;
+.hero-card {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 1.5rem;
   border-radius: 1rem;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-  height: 100%;
+  backdrop-filter: blur(6px);
 }
 
-.feature-card h5,
-.info-card h6,
-.destination-card h5 {
+.hero-card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
   font-weight: 600;
 }
 
-.destination-card {
-  position: relative;
-  min-height: 220px;
+.section {
+  padding: 4rem 0;
 }
 
-.destination-badge {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  background: #0d6efd;
-  color: #ffffff;
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
-.bg-gradient-light {
-  background: linear-gradient(120deg, #e8f1ff, #ffffff);
-}
-
-.navbar {
-  background: #ffffff !important;
-}
-
-footer.footer {
+.info-tile,
+.highlight-card {
   background: #ffffff;
+  border-radius: 1rem;
+  padding: 1.6rem;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+  height: 100%;
+}
+
+.alt-section {
+  background: #ffffff;
+}
+
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.checklist li {
+  padding: 0.4rem 0;
+  font-weight: 500;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.2rem;
+}
+
+.cta {
+  background: #1f6feb;
+  color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.app-footer {
+  background: #0b1c3f;
+  color: #e5e7eb;
+  padding: 3rem 0 2rem;
+}
+
+.app-footer a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  font-size: 0.9rem;
 }
