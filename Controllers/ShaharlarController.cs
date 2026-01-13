@@ -5,11 +5,11 @@ using SayyohlikA.Models;
 
 namespace SayyohlikA.Controllers
 {
-    public class ShaharsController : Controller
+    public class ShaharlarController : Controller
     {
         private readonly MyDbContext _context;
 
-        public ShaharsController(MyDbContext context)
+        public ShaharlarController(MyDbContext context)
         {
             _context = context;
         }
@@ -35,6 +35,17 @@ namespace SayyohlikA.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Shahar shahar)
         {
+            ModelState.Remove(nameof(Shahar.Davlat));
+            var davlat = await _context.Davlatlar.FindAsync(shahar.MamlakatId);
+            if (davlat == null)
+            {
+                ModelState.AddModelError(nameof(Shahar.MamlakatId), "Davlatni tanlang.");
+            }
+            else
+            {
+                shahar.Davlat = davlat;
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Shaharlar.Add(shahar);
@@ -63,6 +74,17 @@ namespace SayyohlikA.Controllers
         public async Task<IActionResult> Edit(int id, Shahar shahar)
         {
             if (id != shahar.Id) return NotFound();
+
+            ModelState.Remove(nameof(Shahar.Davlat));
+            var davlat = await _context.Davlatlar.FindAsync(shahar.MamlakatId);
+            if (davlat == null)
+            {
+                ModelState.AddModelError(nameof(Shahar.MamlakatId), "Davlatni tanlang.");
+            }
+            else
+            {
+                shahar.Davlat = davlat;
+            }
 
             if (ModelState.IsValid)
             {
@@ -110,6 +132,11 @@ namespace SayyohlikA.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult AddShahar()
+        {
+            ViewBag.Davlatlar = _context.Davlatlar.ToList();
+            return View("Create");
+        }
     }
 }
-
