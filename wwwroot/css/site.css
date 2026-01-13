@@ -19,4 +19,90 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #f8f9fb;
+}
+
+.hero-section {
+  background: radial-gradient(circle at top left, #1b5ec9, #0b285c 60%);
+  padding: 5rem 0 4.5rem;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.hero-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.2);
+  color: #1f2937;
+}
+
+.hero-card ul li {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #eef0f4;
+}
+
+.hero-card ul li:last-child {
+  border-bottom: none;
+}
+
+.hero-stats span {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.section-padding {
+  padding: 4rem 0;
+}
+
+.feature-card,
+.info-card,
+.destination-card {
+  background: #ffffff;
+  padding: 1.8rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  height: 100%;
+}
+
+.feature-card h5,
+.info-card h6,
+.destination-card h5 {
+  font-weight: 600;
+}
+
+.destination-card {
+  position: relative;
+  min-height: 220px;
+}
+
+.destination-badge {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: #0d6efd;
+  color: #ffffff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.bg-gradient-light {
+  background: linear-gradient(120deg, #e8f1ff, #ffffff);
+}
+
+.navbar {
+  background: #ffffff !important;
+}
+
+footer.footer {
+  background: #ffffff;
 }
