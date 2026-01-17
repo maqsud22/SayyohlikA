@@ -1,0 +1,30 @@
+@model IEnumerable<SayyohlikA.Models.Shahar>
+@{
+    ViewData["Title"] = "Shaharlar Ro'yxati";
+}
+
+<h2>Shaharlar</h2>
+<a asp-action="Create" class="btn btn-primary mb-2">Yangi Shahar Qo‘shish</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Shahar nomi</th>
+            <th>Davlat</th>
+            <th>Amallar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nomi</td>
+                <td>@item.Davlat?.Nomi</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Tahrirlash</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">O'chirish</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

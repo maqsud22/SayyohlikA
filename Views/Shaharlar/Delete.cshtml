@@ -1,0 +1,16 @@
+@model SayyohlikA.Models.Shahar
+@{
+    ViewData["Title"] = "Shaharni O'chirish";
+}
+
+<h2>Shaharni O'chirish</h2>
+
+<div class="alert alert-warning">
+    <p><strong>@Model.Nomi</strong> shahri o'chiriladi. Davom etishni xohlaysizmi?</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">O'chirish</button>
+    <a asp-action="Index" class="btn btn-secondary">Bekor qilish</a>
+</form>

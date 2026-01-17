@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="uz">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,79 +8,76 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SayyohlikA.styles.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+<body class="app-body">
+    <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SayyohlikA</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Xaridorlar" asp-action="AddXaridor">Xaridorlar</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Bosh sahifa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Davlatlar" asp-action="AddDavlat">Davlatlar</a>
+                            <a class="nav-link" asp-area="" asp-controller="Davlatlar" asp-action="Index">Yo'nalishlar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Shaharlar" asp-action="AddShahar">Shaharlar</a>
+                            <a class="nav-link" asp-area="" asp-controller="Shaharlar" asp-action="Index">Shaharlar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarjimon" asp-action="AddTarjimon">Tarjimon</a>
+                            <a class="nav-link" asp-area="" asp-controller="Tarjimon" asp-action="Index">Tarjimonlar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Yangilikalar" asp-action="AddYangilik">Yangiliklar</a>
+                            <a class="nav-link" asp-area="" asp-controller="Yangiliklar" asp-action="Index">Yangiliklar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="RequestLogs">Request Logs</a>
+                            <a class="btn btn-primary px-4" asp-area="" asp-controller="Xaridorlar" asp-action="AddXaridor">Bron qilish</a>
                         </li>
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="app-footer">
         <div class="container">
-            &copy; 2025 - SayyohlikA - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row g-4">
+                <div class="col-md-5">
+                    <h5>SayyohlikA</h5>
+                    <p>Premium sayohat rejalari, ishonchli hamkorlar va zamonaviy xizmatlar bilan har bir sayohatni o'zgacha qilamiz.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Tezkor havolalar</h6>
+                    <ul class="list-unstyled">
+                        <li><a asp-area="" asp-controller="Yangiliklar" asp-action="Index">Yangiliklar</a></li>
+                        <li><a asp-area="" asp-controller="Davlatlar" asp-action="Index">Davlatlar</a></li>
+                        <li><a asp-area="" asp-controller="Shaharlar" asp-action="Index">Shaharlar</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Kontakt</h6>
+                    <p class="mb-1">+998 90 123 45 67</p>
+                    <p class="mb-1">info@sayyohlika.uz</p>
+                    <p class="mb-0">Toshkent, Amir Temur shoh ko'chasi</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 - SayyohlikA. Barcha huquqlar himoyalangan.
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        // Brauzerdan GEO koordinate so'rash
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                function (pos) {
-                    let lat = pos.coords.latitude;
-                    let lon = pos.coords.longitude;
-
-                    // Backendga yuborish
-                    fetch('/Admin/SaveGpsLocation', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ latitude: lat, longitude: lon })
-                    });
-                },
-                function (err) {
-                    console.log("GPS ruxsat berilmadi:", err);
-                },
-                { enableHighAccuracy: true }
-            );
-        }
-    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
